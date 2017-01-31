@@ -1,5 +1,5 @@
 <?php
-$set = 5;
+$set = 2;
 
 if (isset($_REQUEST["set"])) {
     $set = intval($_REQUEST["set"]);
@@ -44,8 +44,8 @@ $counter = $set;
 if ($counter < 0)
   $counter = 0;
 
-if ($counter > 200)
-  $counter = 200;
+if ($counter > 20)
+  $counter = 20;
 
 $usec = microtime(true);
 $usec_str = sprintf('%.1f', $usec - floor($usec));
