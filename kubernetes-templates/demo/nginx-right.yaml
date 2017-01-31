@@ -11,7 +11,7 @@ metadata:
   name: nginx-right
   namespace: default
 spec:
-  replicas: 50
+  replicas: 10
   selector:
     app: nginx-right
     version: latest
@@ -23,7 +23,7 @@ spec:
       name: nginx-right
     spec:
       containers:
-      - image: docker-registry.linaro.org/drusling/nginx:latest
+      - image: nginx
         imagePullPolicy: IfNotPresent
         name: nginx-right
         resources: {}
