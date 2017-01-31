@@ -1,6 +1,6 @@
 #!/bin/bash
 
-current=50
+current=2
 lastval_left=0
 lastval_right=0
 
@@ -12,7 +12,7 @@ while true; do
     lastval_var=lastval_${side}
     if [ "$current" != "${!lastval_var}" ]; then
        echo "scaling $side to $current"
-       kubectl scale --replicas $current rc/nginx-$side; sleep 1;  
+       kubectl --server=http://192.168.126.131:8080 scale --replicas $current rc/nginx-$side; sleep 1;  
        let ${lastval_var}=$current
     fi
   done
