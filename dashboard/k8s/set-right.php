@@ -44,8 +44,8 @@ $counter = $set;
 if ($counter < 0)
   $counter = 0;
 
-if ($counter > 200)
-  $counter = 200;
+if ($counter > 30)
+  $counter = 30;
 
 $usec = microtime(true);
 $usec_str = sprintf('%.1f', $usec - floor($usec));
