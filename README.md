@@ -33,11 +33,10 @@ delete lines 626 and 628 since you won’t be needing these logos for this demo.
 ```
 8. Edit the kubernetes-dashboard.yaml
 
-Line 38 needs to be changed to amd64 image like below:
-
+>Line 38 needs to be changed to amd64 image like below:
 >image: gcr.io/google_containers/kubernetes-dashboard-amd64:v1.4.0
 >Line 47 needs the IP address changed to the assigned internal address of the kube-master0 like below:
->- --apiserver-host=http://10.0.0.7:8080
+`- --apiserver-host=http://10.0.0.7:8080`
 
 9. To view the kubernetes dashboard we must start it. 
 ```
@@ -50,12 +49,15 @@ Line 38 needs to be changed to amd64 image like below:
 11. To access the kubernetes dashboard we need to know its port
 ```
 # kubectl describe -f kubernetes-dashboard.yaml | grep NodePort
-```
+
 Type:                   NodePort 
 NodePort:               <unset> 30681/TCP
+```
 Notice the number after unset. That number is the port you can reach kubernetes dashboard on.
+
 http://192.168.126.138(Public IP of kube-minion its running on):30681
-12) Edit nginx-left.yaml and nginx-right.yaml
+
+12. Edit nginx-left.yaml and nginx-right.yaml
 ```
 Line 14 change to 10 replicas
 Change line 26 to nginx like below:
@@ -67,7 +69,9 @@ Change line 26 to nginx like below:
 # kubectl create -f nginx-right.yaml
 ```
 14. Install the kubernetes-client (This can be found in the OBS built for SLE 12 SP2)
+```
 zypper in kubernetes-client-1.3.10-5.1.x86_64.rpm
+```
 15. Now lets move over to the controller node and look at the readscale.sh script and edit line 15 to look like below:
 ```
 kubectl --server=http://192.168.126.131:8080 scale --replicas $current rc/nginx-$side; sleep 1;
