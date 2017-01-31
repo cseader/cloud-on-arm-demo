@@ -1,7 +1,9 @@
 These are some simple instructions on how to setup and use these files for a Magnum & Kubernetes Demo.
 
-Most of the work has already been setup and populated already, but here are the steps from a git clone
+Most of the work has already been setup and populated already, but here are the steps from a git clone.
+
 1. git clone https://github.com/dirkmueller/cloud-on-arm-demo to Demo Host machine
+
 2. copy directory cloud-on-arm-demo/dashboard/k8s/* to controller at 192.168.124.81
 ```
 # scp -r /cloud-on-arm-demo/dashboard/k8s/* root@192.168.124.81:/srv/www/openstack-dashboard/media/k8s/
@@ -11,6 +13,7 @@ Most of the work has already been setup and populated already, but here are the 
 <link rel="stylesheet" href="/static/dashboard/css/e4f35630b8c5.css" type="text/css" />
 ```
 delete lines 626 and 628 since you won’t be needing these logos for this demo. Save and exit the file.
+
 4. Install apache2-mod_php5 and php5 (You can find these in the web and scripting module)
 ```
 # zypper in apache2-mod_php5-5.5.14-89.2.x86_64.rpm php5-5.5.14-89.2.x86_64.rpm 
@@ -18,6 +21,7 @@ delete lines 626 and 628 since you won’t be needing these logos for this demo.
 # rcapache2 restart
 ```
 5. Now we can access the AutoScale Dashboard http://192.168.124.81/media/k8s/ where you will see two graphs side by side for containers right and containers left.
+
 6. Copy scripts and kubernetes-templates to the kube-master node (this is the IP Magnum gave this node on the floating network)
 ```
 # scp -r -i /location/of/cert/default.pem /kubernetes-templates/demo/* 192.168.126.131:/root/
@@ -28,10 +32,13 @@ delete lines 626 and 628 since you won’t be needing these logos for this demo.
 # scp -r /scripts/* 192.168.124.81:/root/
 ```
 8. Edit the kubernetes-dashboard.yaml
+
 Line 38 needs to be changed to amd64 image like below:
-image: gcr.io/google_containers/kubernetes-dashboard-amd64:v1.4.0
-Line 47 needs the IP address changed to the assigned internal address of the kube-master0 like below:
-- --apiserver-host=http://10.0.0.7:8080
+
+>image: gcr.io/google_containers/kubernetes-dashboard-amd64:v1.4.0
+>Line 47 needs the IP address changed to the assigned internal address of the kube-master0 like below:
+>- --apiserver-host=http://10.0.0.7:8080
+
 9. To view the kubernetes dashboard we must start it. 
 ```
 # kubectl create -f kubernetes-dashboard.yaml
