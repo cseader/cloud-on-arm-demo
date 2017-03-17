@@ -43,6 +43,8 @@ while True:
            # Return the maximum of the absolute value of all samples in a fragment.
            if audioop.max(data, 2) > 10000:
                vol = vol + 1
+   except KeyboardInterrupt:
+       exit()
    except:
        continue
 
